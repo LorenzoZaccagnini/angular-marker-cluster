@@ -1,4 +1,5 @@
 # Angular Google Map Marker Cluster
+![screenshot](https://github.com/LorenzoZaccagnini/angular-marker-cluster/blob/master/screenshot.png "Screen shot of the Angular application")
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
@@ -8,7 +9,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Description
-This web app shows how agm and agm cluster can be used to cluster a large amount of markers in google map
+This Angular application shows how agm and agm cluster can be used to cluster a large amount of markers in google map
 
 ## Code scaffolding
 
