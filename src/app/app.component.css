@@ -1,0 +1,15 @@
+agm-map {
+  height: 300px;
+}
+
+agm-marker{
+  filter: blur(20px);
+}
+
+* {
+  font-family: Lato;
+}
+
+a {
+  color: darkblue;
+}
