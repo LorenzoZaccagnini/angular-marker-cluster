@@ -1,23 +1,43 @@
-import { Component } from '@angular/core';
-import { MouseEvent } from '@agm/core';
+import { Component, OnInit } from '@angular/core';
+import { MouseEvent, GoogleMapsAPIWrapper } from '@agm/core';
 import {Http} from '@angular/http';
+
+declare var google: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   // google maps zoom level
-  zoom: number = 8;
+  zoom: number = 15;
+  moving = false;
+
 
   // initial center position for the map
-  lat: number = 45.116177;
+  lat: number = 45.115177;
   lng: number = 7.742615;
+  center = {lat: 0, lng: 0};
+  bounds = {lat: 0, lng: 0};
+  map: any;
 
   url = 'https://api.citybik.es/v2/networks/to-bike';
   stationsArr;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, public googleMapsAPIWrapper: GoogleMapsAPIWrapper) {
+
+    this.googleMapsAPIWrapper.getZoom().then(center => {
+      this.center = center;
+    })
+
+    console.log(this.center)
+
+
+
+
+
+
     this.http.get(this.url).subscribe(res => {
       console.log(res.json())
       this.stationsArr = res.json().network.stations
@@ -25,6 +45,40 @@ export class AppComponent {
     });
 
    }
+
+public loadAPIWrapper(map) {
+  this.map = map;
+  this.getMapCenter();
+}
+
+public getMapCenter(){
+  if(!this.moving){
+    this.moving = true;
+    setTimeout(()=>{
+      this.center = {lat: this.map.getCenter().lat(), lng: this.map.getCenter().lng()};
+      this.bounds = {lat: this.map.getBounds().f.b, lng: this.map.getBounds().b.b};
+      console.log(this.bounds)
+      this.filteredStations = this.stationsArr.filter( value => {
+        return value.latitude >= this.bounds.lat && value.latitude >= this.bounds.lat
+      })
+      console.log(this.filteredStations.length)
+      this.moving = false;
+    },2000)
+  }
+
+  return this.center;
+}
+
+public isInTheBounds(value) {
+  console.log('bound task', this.bounds.lat)
+  return ;
+}
+
+ngOnInit(): void {
+    console.log("init works")
+
+
+}
 
 
 

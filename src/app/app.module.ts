@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { AgmCoreModule } from '@agm/core';
+import { MapContentComponent } from './mapcore.component';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { HttpModule } from '@angular/http';
 
@@ -21,7 +22,8 @@ import { HttpModule } from '@angular/http';
     AgmJsMarkerClustererModule,
 
   ],
-  declarations: [ AppComponent ],
-  bootstrap:    [ AppComponent ]
+  declarations: [ AppComponent, MapContentComponent],
+  bootstrap:    [ AppComponent ],
+  providers: [GoogleMapsAPIWrapper]
 })
 export class AppModule { }
